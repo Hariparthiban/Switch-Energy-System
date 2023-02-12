@@ -1,0 +1,32 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(249, 236, 211);
+    width: 30%;
+    height: 65%;
+    position:absolute;
+    left:57%;
+    top:15%;
+     
+  }
+
+  #inp-name {
+    width: 80%;
+    position:relative;
+    left:10%;
+    top:10%;
+  }
+
+  #inp-pwd {
+    width: 80%;
+    position:relative;
+    left:10%;
+    top:20%;
+  }
+.btn
+{
+  position: relative;
+  top:35%;
+  left:65%;
+  width:23%;
+}
