@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+     <mat-card-header class="header" >Sign Up</mat-card-header>
+    <mat-card class="card">
+        <form [formGroup]="signUpForm" class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput id="inp" formControlName="userName" >
+                <mat-icon matSuffix><span class="material-icons-sharp">perm_identity</span></mat-icon>
+                <mat-error>Fill this field</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email" id="inp">
+                <mat-icon matSuffix> <span class="material-icons-sharp">mail</span></mat-icon>
+                <mat-error>Fill this field</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input type="text" matInput  id="inp" formControlName="phone">
+                <mat-icon matSuffix><span class="material-icons-sharp">phone</span></mat-icon>
+                <mat-error>Fill this field</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="text" matInput formControlName="password"  id="inp">
+                <mat-icon matSuffix><span class="material-icons-sharp">https</span></mat-icon>
+                <mat-error>Fill this field</mat-error>
+            </mat-form-field>
+            <button (click)="sign()" mat-raised-button color="primary" id="btn">Create User</button>
+        </form>
+    </mat-card>
+    <mat-card class="img-card">
+    </mat-card>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="container">
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <h1>Smart Meters</h1>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="diag">
+        <button class="btn" mat-raised-button>View SmartMeters</button>
+        <p></p>
+    </div>
+   
+    <table class="table table-hover table-dark">
+    
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">MeterId</th>
+                <th scope="col">UserId</th>
+                <th scope="col">Provider Name</th>
+                <th scope="col">charges</th>
+                <th scope="col">Connection</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let meter of meterList | paginate :{itemsPerPage: limit, currentPage: page};" >
+               <td>meter</td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        <router-outlet></router-outlet>
+        </table>
+</div>

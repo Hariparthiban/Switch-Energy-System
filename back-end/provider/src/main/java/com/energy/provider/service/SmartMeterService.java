@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SmartMeterService {
@@ -22,14 +23,14 @@ public class SmartMeterService {
     return smartMeterRepository.enrollSmartMeter(userId);
  }
 
- public List<SmartMeter> smartMeters() {
+     public List<SmartMeter> smartMeters() {
     return smartMeterRepository.allSmartMeter();
  }
- public List<SmartMeter> smartMeterRequests()
+     public List<SmartMeter> smartMeterRequests()
  {
      return smartMeterRepository.smartMeterRequests();
  }
-    public String enableMeterConnection(String meterId) {
+     public String enableMeterConnection(String meterId) {
       return smartMeterRepository.enableMeterConnection(meterId);
     }
     public String disableMeterConnection(String meterId) {
@@ -40,5 +41,9 @@ public class SmartMeterService {
     }
     public Provider viewProvider(String meterId) {
         return smartMeterRepository.viewProvider(meterId);
+    }
+
+    public List<SmartMeter> userSmartMeters(String userId) {
+        return smartMeterRepository.userSmartMeters(userId);
     }
 }

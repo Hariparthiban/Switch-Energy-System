@@ -47,4 +47,11 @@ public class SmartMeterRepository {
        SmartMeter meter = mongoTemplate.findById(meterId, SmartMeter.class);
        return meter.getProvider();
     }
+
+    public List<SmartMeter> userSmartMeters(String userId) {
+        List<SmartMeter> meterList = mongoTemplate.findAll(SmartMeter.class);
+        List<SmartMeter> userMeterList = meterList.stream().filter(x -> x.getUserId().equals(userId)).collect(Collectors.toList());
+        return userMeterList;
+    }
+
 }

@@ -1,19 +1,22 @@
 package com.energy.provider.repository;
-
+import com.energy.provider.pojo.SmartMeter;
 import com.energy.provider.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Repository
 public class UserRepository {
    @Autowired
     private MongoTemplate mongoTemplate;
     public String createUser(User user) {
-       mongoTemplate.save(user);
+       mongoTemplate.save(new User(user.getUserName(),user.getEmail(),user.getPhone(),user.getPassword()));
        return "Requested Account Created";
     }
     public List<User> viewEndUsers() {
@@ -21,5 +24,18 @@ public class UserRepository {
        List<User> endUser = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
        return endUser;
     }
-
+    public ResponseEntity<?> loginUser(String phone, String password)
+    {
+        List<User> userList = mongoTemplate.findAll(User.class);
+        List<User> endUserList = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
+        boolean phno = endUserList.stream().anyMatch(x -> x.getPhone().equals(phone));
+        boolean passcode = endUserList.stream().anyMatch(x -> x.getPassword().equals(password));
+        Optional <User> user  = endUserList.stream().filter(x -> x.getPhone().equals(phone) && x.getPassword().equals(password)).findFirst();
+       if(phno && passcode ) {
+           return new ResponseEntity<>(user, HttpStatus.OK);
+       }
+       else{
+           return new ResponseEntity<String>("Invalid Credentials", HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+    }
 }

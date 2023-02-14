@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RestController
+@CrossOrigin("*")
 @RequestMapping("smartMeter")
 public class SmartMeterController {
      @Autowired
@@ -35,5 +38,11 @@ public class SmartMeterController {
     @GetMapping("view-provider/{meterId}")
     public Provider viewProvider(@PathVariable String meterId) {
         return smartMeterService.viewProvider(meterId);
+    }
+
+    @GetMapping("/userMeterList/{userId}")
+    public List<SmartMeter> userSmartMeters(@PathVariable String userId) {
+         System.out.print(userId);
+       return smartMeterService.userSmartMeters(userId);
     }
 }

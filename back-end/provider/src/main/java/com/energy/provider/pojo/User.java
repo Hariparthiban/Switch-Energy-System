@@ -10,22 +10,18 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private long phone;
+    private String phone;
     private String role;
-    public User(String userName, String email, String password, long phone) {
+    public User(String userName, String email,String phone,String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
-        this.password = password;
         this.phone = phone;
+        this.password = password;
         this.role = "user";
     }
-
     public String getId() {
         return id;
-    }
-    public void setUserId(String id) {
-        this.id = id;
     }
     public String getUserName() {
         return userName;
@@ -54,11 +50,15 @@ public class User {
         this.role = role;
     }
 
-    public long getPhone() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }

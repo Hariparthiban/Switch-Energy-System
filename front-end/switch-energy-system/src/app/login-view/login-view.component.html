@@ -18,12 +18,12 @@
         </mat-card-title>
       </mat-card-header>
       <mat-form-field id="inp-name">
-        <input matInput placeholder="User Name">
+        <input matInput placeholder="Enter Phone Number" formControlName="phone" >
       </mat-form-field>
       <mat-form-field id="inp-pwd">
-        <input matInput placeholder="Password">
+        <input matInput placeholder="Enter Password" formControlName="password">
       </mat-form-field>
-      <button mat-flat-button color="primary" class="btn"> View user<span class="material-symbols-outlined">
+      <button mat-flat-button color="primary" (click)="toggle()" class="btn">View user<span class="material-symbols-outlined">
         double_arrow
         </span></button>
     </mat-card>
