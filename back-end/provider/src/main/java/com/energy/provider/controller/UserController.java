@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserController {
   @Autowired
     private UserService userService;
-  @PostMapping("/enroll")
+       @PostMapping("/enroll")
        public String createUser(@RequestBody User user)
        {
            return userService.createUser(user);
@@ -26,9 +27,14 @@ public class UserController {
        public List<User> viewEndUsers() {
         return userService.viewEndUsers();
     }
-@GetMapping("/{phone}/{password}/login")
-    public ResponseEntity<?> loginUser(@PathVariable String phone, @PathVariable String password)
+    @GetMapping("/{phone}/{password}/login")
+    public ResponseEntity<?> loginUser(@PathVariable long phone, @PathVariable String password)
     {
         return userService.loginUser(phone,password);
+    }
+    @GetMapping("get/{phone}")
+    public Optional<User> getUser(@PathVariable long phone)
+    {
+        return userService.getUser(phone);
     }
 }

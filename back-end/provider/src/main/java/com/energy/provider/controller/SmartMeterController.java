@@ -3,6 +3,7 @@ import com.energy.provider.pojo.Provider;
 import com.energy.provider.pojo.SmartMeter;
 import com.energy.provider.service.SmartMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -24,12 +25,17 @@ public class SmartMeterController {
     {
         return smartMeterService.smartMeterRequests();
     }
-    @PutMapping("enable/{meterId}")
-    public String enableMeterConnection(@PathVariable String meterId) {
+    @GetMapping("allMeters")
+    public List<SmartMeter> viewSmartMeters()
+    {
+        return smartMeterService.smartMeters() ;
+    }
+    @GetMapping("enable/{meterId}")
+    public  ResponseEntity<?> enableMeterConnection(@PathVariable String meterId) {
         return smartMeterService.enableMeterConnection(meterId);
     }
-    @PutMapping("disable/{meterId}")
-    public String disableMeterConnection(@PathVariable String meterId) {return smartMeterService.disableMeterConnection(meterId);
+    @GetMapping("disable/{meterId}")
+    public ResponseEntity<?> disableMeterConnection(@PathVariable String meterId) {return smartMeterService.disableMeterConnection(meterId);
     }
     @GetMapping("view-meter/{meterId}")
       public SmartMeter viewSmartMeter(@PathVariable String meterId) {

@@ -45,3 +45,8 @@
     position: relative;
     top:150px;
    }
+   #inp2,#inp3,#inp4
+   {
+      position:relative;
+      top:7%;
+   }

@@ -30,3 +30,29 @@ button
 .btn{
     background-color: mediumslateblue;
 }
+
+.col-sm-6
+{
+    position:absolute;
+    top:20%;
+    left:10%;
+}
+ 
+.card{
+    position:relative;
+    left:6%;
+    top:11%;
+    height:45%;
+}
+.btn {
+   position: relative;
+   top:15%;
+}
+#btn1 {
+    position: relative;
+    top:15%;
+    left:10%;
+ }
+.card-title{
+    font-size:20px;  
+}

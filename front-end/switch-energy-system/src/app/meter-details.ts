@@ -1,8 +1,8 @@
 import { ProviderDetails } from "./provider-details";
 
 export interface MeterDetails   {
-    meterId: string | null |undefined,
+    smartMeterId: string | null |undefined,
     userId : string | null |undefined,
-    connection: string | null| undefined;
+    connectionStatus: string | null| undefined;
     provider : ProviderDetails
 }

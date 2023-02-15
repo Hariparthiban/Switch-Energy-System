@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,10 +31,10 @@ public class SmartMeterService {
  {
      return smartMeterRepository.smartMeterRequests();
  }
-     public String enableMeterConnection(String meterId) {
+     public  ResponseEntity<?> enableMeterConnection(String meterId) {
       return smartMeterRepository.enableMeterConnection(meterId);
     }
-    public String disableMeterConnection(String meterId) {
+    public ResponseEntity<?> disableMeterConnection(String meterId) {
       return smartMeterRepository.disableMeterConnection(meterId);
     }
     public SmartMeter viewSmartMeter(String meterId) {

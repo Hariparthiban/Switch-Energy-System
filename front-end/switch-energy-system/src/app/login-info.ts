@@ -1,4 +1,4 @@
 export interface LoginInfo {
-    phone : string | null | undefined;
+    phone : number | null | undefined ;
     password : string | null | undefined;
 }

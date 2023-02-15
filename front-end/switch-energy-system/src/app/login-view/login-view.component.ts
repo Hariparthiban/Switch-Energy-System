@@ -17,23 +17,24 @@ export class LoginViewComponent implements OnInit {
 
   constructor(private api : ApiUserService,private router:Router,private meter : SmartMeterComponent  ) { }
   loginForm = new FormGroup({
-    phone: new FormControl(''),
+    phone: new FormControl(0),
     password: new FormControl(''),
   });
- 
-  loginDetails: LoginInfo={phone:'',password:''}
-
+  loginDetails: LoginInfo = {phone:null,password:''}
   ngOnInit(): void {
   }
    toggle()
-   {
-    this.loginDetails.password = this.loginForm.value.password;
+   { 
     this.loginDetails.phone = this.loginForm.value.phone;
-    this.api.login(this.loginDetails).subscribe((response) => {
-       this.meter.userData = response;
-       this.meter.view();
-    }, (error: HttpErrorResponse) => {
-      const err = error
-    })
+    this.loginDetails.password = this.loginForm.value.password;
+      this.api.login(this.loginDetails).subscribe((response) => {
+      },(error:HttpErrorResponse) => {
+          const err = error;
+            if(err.status == 200)
+            {
+              sessionStorage.setItem("phoneNumber", JSON.stringify(this.loginDetails.phone))
+               this.router.navigate(['smart-meter']);
+            }
+      })
    }
 }

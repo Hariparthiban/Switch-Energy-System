@@ -10,9 +10,9 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private String phone;
+    private long phone;
     private String role;
-    public User(String userName, String email,String phone,String password) {
+    public User(String userName, String email,long phone,String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -54,11 +54,11 @@ public class User {
         this.id = id;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 }

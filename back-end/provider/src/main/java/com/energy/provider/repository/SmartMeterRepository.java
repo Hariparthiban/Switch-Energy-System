@@ -2,11 +2,14 @@ package com.energy.provider.repository;
 
 import com.energy.provider.pojo.Provider;
 import com.energy.provider.pojo.SmartMeter;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -30,16 +33,16 @@ public class SmartMeterRepository {
             .collect(Collectors.toList());
         return pendingMeters;
     }
-        public String enableMeterConnection(String meterId) {
+        public  ResponseEntity<?> enableMeterConnection(String meterId) {
         mongoTemplate.findAndModify(new Query().addCriteria(Criteria.where("smartMeterId").is(meterId))
                 ,new Update().set("connectionStatus","Approved"),SmartMeter.class);
-        return "Connection Established for Requested SmartMeter";
+            return  new ResponseEntity<>("Disabled", HttpStatus.OK);
     }
-        public String disableMeterConnection(String meterId) {
+        public ResponseEntity<?> disableMeterConnection(String meterId) {
         mongoTemplate.findAndModify(new Query().addCriteria(Criteria.where("smartMeterId").is(meterId))
                 ,new Update().set("connectionStatus","Disabled"),SmartMeter.class);
-        return "Connection Disabled for Requested SmartMeter";
-    }
+        return  new ResponseEntity<>("Disabled", HttpStatus.OK);
+     }
        public SmartMeter viewSmartMeter(String meterId) {
         return mongoTemplate.findById(meterId,SmartMeter.class);
     }

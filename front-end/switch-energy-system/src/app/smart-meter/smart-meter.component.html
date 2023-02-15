@@ -1,38 +1,69 @@
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Switch Energy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">View Providers</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Show Readings</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="openDialog()" >Add Meters</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Switch Providers</a>
+      </li>
+    </ul>
+    <form [formGroup]="form" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" formControlName="meter"  type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-info my-2 my-sm-0" (click)="find()">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="card text-bg-danger mb-3" *ngIf="show" style="max-width: 24rem;">
+  <div class="card-header">User Meter</div>
+  <div class="card-body">
+    <h5 class="card-title">Meter-id {{userMeter.smartMeterId}} </h5>
     <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <h1>Smart Meters</h1>
-            </td>
-        </tr>
+      <tbody>
+        <br>
+         <tr>
+          <th>{{"ProviderName"}}</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+           <td>{{userMeter.provider.name}}</td>
+         </tr> 
+         <br>
+         <tr>
+          <th>{{"Connection"}}</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{userMeter.connectionStatus}}</td>
+         </tr>
+         <br>
+         <tr>
+          <th>{{"charges"}}</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{userMeter.provider.chargesConception}}</td>
+         </tr>
+      </tbody>
     </table>
-    
-    <div class="diag">
-        <button class="btn" mat-raised-button>View SmartMeters</button>
-        <p></p>
-    </div>
-   
-    <table class="table table-hover table-dark">
-    
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">MeterId</th>
-                <th scope="col">UserId</th>
-                <th scope="col">Provider Name</th>
-                <th scope="col">charges</th>
-                <th scope="col">Connection</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let meter of meterList | paginate :{itemsPerPage: limit, currentPage: page};" >
-               <td>meter</td>
-            </tr>
-        </tbody>
-        <pagination-controls (pageChange)="page = $event"></pagination-controls>
-        <router-outlet></router-outlet>
-        </table>
+    <button type="button" class="btn btn-info" (click)="close()" >close</button>
+    <button type="button" class="btn btn-info"  id="btn1">View Readings</button>
 </div>
+
+<!-- 63ea2a1940d94379d2ef514e -->

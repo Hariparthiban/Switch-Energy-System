@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SmartMeterComponent } from './smart-meter/smart-meter.component'; 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminViewComponent } from './admin-view/admin-view.component';
+import { ProviderComponent } from './provider/provider.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
     SignUpComponent,
     SmartMeterComponent,
     AdminViewComponent,
+    ProviderComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,11 +5,15 @@
     width: 30%;
     height: 65%;
     position:absolute;
-    left:57%;
+    left:33%;
     top:15%;
      
   }
-
+  .nav-link{
+    position:relative;
+    top:110px;
+    
+  }
   #inp-name {
     width: 80%;
     position:relative;
@@ -28,5 +32,5 @@
   position: relative;
   top:35%;
   left:65%;
-  width:23%;
+  width:28%;
 }

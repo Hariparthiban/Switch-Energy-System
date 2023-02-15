@@ -1,7 +1,7 @@
 export interface Identity {
-    userId:string | null | undefined;
-    name: string | null | undefined;
-    phone :  string | null | undefined;
+    id:string | null | undefined;
+    userName: string | null | undefined;
+    phone :  number | null | undefined;
     password:  string | null | undefined;
     role:  string | null | undefined;
     email: string | null | undefined;
