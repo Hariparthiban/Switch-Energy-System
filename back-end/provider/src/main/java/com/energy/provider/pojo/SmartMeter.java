@@ -1,25 +1,35 @@
 package com.energy.provider.pojo;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
-
 @Document(collection="smartMeter")
+@NoArgsConstructor
+@AllArgsConstructor
 public class SmartMeter {
 
-    private String userId;
     @Id
     private String smartMeterId;
-    private List<Readings> readingList;
+    private String userId;
+    private List<Readings> readings;
     private String connectionStatus;
     private Provider provider;
 
     public SmartMeter(String userId) {
         this.userId = userId;
-        this.smartMeterId= smartMeterId;
         this.connectionStatus = "pending";
         this.provider = new Provider("Power for ALL",2);
+        this.readings = new ArrayList<Readings>();
+    }
+    public SmartMeter(String userId,Provider provider) {
+        this.userId = userId;
+        this.connectionStatus = "pending";
+        this.provider = new Provider(provider.getName(), provider.getChargesConception());
+        this.readings = new ArrayList<Readings>();
     }
     public String getUserId() {
         return userId;
@@ -45,12 +55,12 @@ public class SmartMeter {
         this.smartMeterId = smartMeterId;
     }
 
-    public List<Readings> getReadingList() {
-        return readingList;
+    public List<Readings> getReadings() {
+        return readings;
     }
 
-    public void setReadingList(List<Readings> readingList) {
-        this.readingList = readingList;
+    public void setReadings(List<Readings> readings) {
+        this.readings = readings;
     }
 
     public String getConnectionStatus() {

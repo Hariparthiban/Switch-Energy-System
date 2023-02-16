@@ -37,11 +37,11 @@ public class UserRepository {
            return new ResponseEntity<String>("Invalid Credentials", HttpStatus.INTERNAL_SERVER_ERROR);
        }
     }
-    public Optional<User> getUser(long phone)
+    public Optional<User> findByName(String name)
     {
         List<User> userList = mongoTemplate.findAll(User.class);
         List<User> endUserList = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
-        Optional <User> user  = endUserList.stream().filter(x -> x.getPhone() == phone ).findFirst();
+        Optional <User> user  = endUserList.stream().filter(x -> x.getUserName().equals(name)).findFirst();
         return  user;
     }
 }

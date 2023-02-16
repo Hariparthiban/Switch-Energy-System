@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProviderRepository {
     @Autowired
@@ -31,5 +33,10 @@ public class ProviderRepository {
     {
         mongoTemplate.save(new Provider(provider.getName(),provider.getChargesConception()));
         return "Created New provider";
+    }
+
+    public List<Provider> getProviders()
+    {
+        return mongoTemplate.findAll(Provider.class);
     }
 }

@@ -20,30 +20,31 @@ public class SmartMeterController {
      public String enrollSmartMeter(@PathVariable String userId) {
          return smartMeterService.enrollMeter(userId);
      }
-     @GetMapping("requested-meters")
+     @GetMapping("/requested-meters")
     public List<SmartMeter> smartMeterRequests()
     {
         return smartMeterService.smartMeterRequests();
     }
-    @GetMapping("allMeters")
+    @GetMapping("/allMeters")
     public List<SmartMeter> viewSmartMeters()
     {
         return smartMeterService.smartMeters() ;
     }
-    @GetMapping("enable/{meterId}")
+    @PutMapping("enable/{meterId}")
     public  ResponseEntity<?> enableMeterConnection(@PathVariable String meterId) {
         return smartMeterService.enableMeterConnection(meterId);
     }
-    @GetMapping("disable/{meterId}")
+    @PutMapping("disable/{meterId}")
     public ResponseEntity<?> disableMeterConnection(@PathVariable String meterId) {return smartMeterService.disableMeterConnection(meterId);
     }
     @GetMapping("view-meter/{meterId}")
       public SmartMeter viewSmartMeter(@PathVariable String meterId) {
         return smartMeterService.viewSmartMeter(meterId);
     }
-    @GetMapping("view-provider/{meterId}")
-    public Provider viewProvider(@PathVariable String meterId) {
-        return smartMeterService.viewProvider(meterId);
+
+@PostMapping("addmeter/{userId}/{providerName}")
+    public String addMeters(@PathVariable String userId,@PathVariable String providerName) {
+        return  smartMeterService.addMeters(userId,providerName);
     }
 
     @GetMapping("/userMeterList/{userId}")

@@ -1,9 +1,11 @@
 package com.energy.provider.pojo;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "provider")
 public class Provider {
+    @Id
     private String name;
     private int chargesConception;
     private String status;
@@ -11,9 +13,7 @@ public class Provider {
     public Provider(String name, int chargesConception) {
         this.name = name;
         this.chargesConception = chargesConception;
-        this.status = "pending";
     }
-
     public String getStatus() {
         return status;
     }

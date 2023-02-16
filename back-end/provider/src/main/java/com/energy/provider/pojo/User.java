@@ -11,14 +11,14 @@ public class User {
     private String email;
     private String password;
     private long phone;
-    private String role;
+    private String roles;
     public User(String userName, String email,long phone,String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.phone = phone;
         this.password = password;
-        this.role = "user";
+        this.roles = "user";
     }
     public String getId() {
         return id;
@@ -43,11 +43,11 @@ public class User {
     }
 
     public String getRole() {
-        return role;
+        return roles;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.roles = role;
     }
 
     public void setId(String id) {

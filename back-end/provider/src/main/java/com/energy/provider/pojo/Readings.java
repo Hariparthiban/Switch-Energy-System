@@ -1,34 +1,24 @@
 package com.energy.provider.pojo;
-import java.util.Date;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDateTime;
+@Document(collection = "Readings")
 public class Readings {
-    private String smartMeterId;
-    private Date date;
-    private long timeStamp;
-    private double unitsConsumed;
-    private long amount;
+    private LocalDateTime date;
+    private  long timeStamp;
+    private long unitsConsumed;
 
-    public Readings(String smartMeterId, Date date, long timeStamp, double unitsConsumed) {
-        this.smartMeterId = smartMeterId;
-        this.date = date;
-        this.timeStamp = timeStamp;
+    public Readings(long unitsConsumed) {
+        this.date = LocalDateTime.now();
+        this.timeStamp = System.currentTimeMillis();
         this.unitsConsumed = unitsConsumed;
     }
-
-    public String getSmartMeterId() {
-        return smartMeterId;
-    }
-    public void setSmartMeterId(String smartMeterId) {
-        this.smartMeterId = smartMeterId;
-    }
-
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
-
     public long getTimeStamp() {
         return timeStamp;
     }
@@ -37,11 +27,11 @@ public class Readings {
         this.timeStamp = timeStamp;
     }
 
-    public double getUnitsConsumed() {
+    public long getUnitsConsumed() {
         return unitsConsumed;
     }
 
-    public void setUnitsConsumed(double unitsConsumed) {
+    public void setUnitsConsumed(long unitsConsumed) {
         this.unitsConsumed = unitsConsumed;
     }
 }

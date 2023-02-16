@@ -10,11 +10,17 @@
             </td>
         </tr>
     </table>
+
     <div class="diag">
-        <button class="btn" mat-raised-button>View SmartMeters</button>
+        <button class="btn" (click)="viewMeters()" mat-raised-button>View SmartMeters</button>
         <p></p>
     </div>
 
+    <div class="diag-box">
+        <button class="btn1" (click)="createProvider()" mat-raised-button>Create Provider</button>
+        <p></p>
+    </div>
+    
     <table class="table table-striped table-hover">
 
         <thead class="thead-dark">

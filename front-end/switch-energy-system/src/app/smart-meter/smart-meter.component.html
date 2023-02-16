@@ -8,20 +8,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">View Providers</a>
+        <a class="nav-link" (click)="openDialog()" >View Providers</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Show Readings</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" (click)="openDialog()" >Add Meters</a>
+        <a class="nav-link" (click)="openMeterBox()" >Add Meters</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Switch Providers</a>
       </li>
     </ul>
     <form [formGroup]="form" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" formControlName="meter"  type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" formControlName="meter"  type="search" placeholder="Find By Meter ID" aria-label="Find">
       <button class="btn btn-info my-2 my-sm-0" (click)="find()">Search</button>
     </form>
   </div>
@@ -62,7 +62,7 @@
          </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-info" (click)="close()" >close</button>
+    <button type="button" class="btn btn-info" (click)="close()">close</button>
     <button type="button" class="btn btn-info"  id="btn1">View Readings</button>
 </div>
 

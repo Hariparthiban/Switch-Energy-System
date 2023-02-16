@@ -37,12 +37,14 @@ public class SmartMeterService {
     public ResponseEntity<?> disableMeterConnection(String meterId) {
       return smartMeterRepository.disableMeterConnection(meterId);
     }
+
+    public String addMeters(String userId,String providerName) {
+       return smartMeterRepository.addMeters(userId,providerName);
+    }
     public SmartMeter viewSmartMeter(String meterId) {
      return smartMeterRepository.viewSmartMeter(meterId);
     }
-    public Provider viewProvider(String meterId) {
-        return smartMeterRepository.viewProvider(meterId);
-    }
+
 
     public List<SmartMeter> userSmartMeters(String userId) {
         return smartMeterRepository.userSmartMeters(userId);

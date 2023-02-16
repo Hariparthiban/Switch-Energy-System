@@ -18,6 +18,9 @@ import { SmartMeterComponent } from './smart-meter/smart-meter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { ProviderComponent } from './provider/provider.component';
+import { AddMeterComponent } from './add-meter/add-meter.component';
+import { CreateProviderComponent } from './create-provider/create-provider.component';
+import { ViewReadingsComponent } from './view-readings/view-readings.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { ProviderComponent } from './provider/provider.component';
     SmartMeterComponent,
     AdminViewComponent,
     ProviderComponent,
+    AddMeterComponent,
+    CreateProviderComponent,
+    ViewReadingsComponent,
   ],
   imports: [
     BrowserModule,

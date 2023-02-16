@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
-@RequestMapping("provider")
+@RestController
+@RequestMapping("providers")
 @Controller
 public class ProviderController {
 
@@ -25,8 +28,13 @@ public class ProviderController {
     public String switchProvider(String currentProvider,String switchingProvider) {
         return  providerService.switchProvider(currentProvider,switchingProvider);
     }
+    @GetMapping("get-providers")
+    public List<Provider> getProviders()
+    {
+        return providerService.getProviders();
+    }
 
-    @PostMapping("/create-provider")
+    @PostMapping("create")
     public String createProvider(@RequestBody Provider provider)
     {
         return providerService.createProvider(provider);

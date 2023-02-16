@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiUserService } from '../api-user.service';
+import { ProviderDetails } from '../provider-details';
 
 @Component({
   selector: 'app-provider',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProviderComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private api : ApiUserService) { }
+   providers : ProviderDetails[] = []
+    ngOnInit(): void {
+    this.api.viewProvider().subscribe((response) => {
+       this.providers = response;
+    })
   }
 
 }

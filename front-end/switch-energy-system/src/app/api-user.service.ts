@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginInfo } from './login-info';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserInfo } from './user-info';
 import { MeterDetails } from './meter-details';
 import { Identity } from './identity';
+import { ProviderDetails } from './provider-details';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,7 @@ export class ApiUserService {
   userIdentity : Identity = { id:'',userName:'',email:'',phone:null,password:'',role:''}
   baseUrl = "http://localhost:8080/user";
   meterUrl = "http://localhost:8080/smartMeter/"
+  providerUrl = "http://localhost:8080/providers/"
   
     login(data:LoginInfo):Observable<String>
     {
@@ -29,11 +31,11 @@ export class ApiUserService {
     }
     enable(id:string|null|undefined )
     {
-      return this.http.get(`${this.meterUrl}enable/${id}`);
+      return this.http.put(`${this.meterUrl}enable/${id}`,null);
     }
     disable(id:string|null|undefined)
     {
-      return this.http.get(`${this.meterUrl}disable/${id}`);
+      return this.http.put(`${this.meterUrl}disable/${id}`,null);
     }
     getUser(phone: string | null):Observable<Identity>
     {
@@ -44,4 +46,18 @@ export class ApiUserService {
     {
        return this.http.get<MeterDetails>(`${this.meterUrl}view-meter/${meterId}`);
     }
+    addMeter(userId: string | null | undefined,name:string | null | undefined):Observable<object>
+    {
+       return this.http.post<object>(`${this.meterUrl}addmeter/${userId}/${name}`,null);
+    }
+    
+    createProvider(provider : object):Observable<String>
+    {
+      return this.http.post<string>(`${this.providerUrl}create`,provider);
+    }
+    viewProvider():Observable<ProviderDetails[]>
+    {
+      return this.http.get<ProviderDetails[]>(`${this.providerUrl}get-providers`);
+    }
+
 }

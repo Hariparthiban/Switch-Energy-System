@@ -7,16 +7,14 @@ import { Identity } from '../identity';
 import { MeterDetails } from '../meter-details';
 import {MatDialog} from '@angular/material/dialog'
 import { ProviderDetails } from '../provider-details';
+import { ProviderComponent } from '../provider/provider.component';
+import { AddMeterComponent } from '../add-meter/add-meter.component';
 @Component({
   selector: 'app-smart-meter',
   templateUrl: './smart-meter.component.html',
   styleUrls: ['./smart-meter.component.css'],
 })
-@Component({
-  selector: 'app-provider',
-  templateUrl: './provider.component.html',
-  styleUrls: ['./provider.component.css']
-})
+
 export class SmartMeterComponent implements OnInit {
 
   constructor(private api: ApiUserService ,private router : Router,public dialog: MatDialog) { }
@@ -31,9 +29,15 @@ export class SmartMeterComponent implements OnInit {
     provider: {name:'',chargesConception:null}
   }
   openDialog() {
-    
-
+    this.dialog.open(ProviderComponent,{width:'450px' },);
   }
+  
+  openMeterBox()
+  {
+    this.dialog.open(AddMeterComponent,{width:'450px',height:'300px' },);
+  }
+  
+   
   form = new FormGroup({
     meter: new FormControl(''),
   });
@@ -50,10 +54,7 @@ export class SmartMeterComponent implements OnInit {
     })
   }
   show : boolean = false;
-  view()
-  {
-    console.log(this.userData.id);
-  }
+  
   find()
   {
    this.api.getMeter(this.form.value.meter).subscribe((response) => {
@@ -61,7 +62,6 @@ export class SmartMeterComponent implements OnInit {
     console.log(this.userMeter);
   })
   this.show = true; 
- 
  }
  close()
  {
