@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button'; 
 import {MatIconModule} from '@angular/material/icon';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { SmartMeterComponent } from './smart-meter/smart-meter.component'; 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminViewComponent } from './admin-view/admin-view.component';
@@ -21,6 +21,8 @@ import { ProviderComponent } from './provider/provider.component';
 import { AddMeterComponent } from './add-meter/add-meter.component';
 import { CreateProviderComponent } from './create-provider/create-provider.component';
 import { ViewReadingsComponent } from './view-readings/view-readings.component';
+import { TokenGenerateInterceptor } from './token-generate.interceptor';
+import { ApiUserService } from './api-user.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ViewReadingsComponent } from './view-readings/view-readings.component';
     AddMeterComponent,
     CreateProviderComponent,
     ViewReadingsComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,12 @@ import { ViewReadingsComponent } from './view-readings/view-readings.component';
     NgxPaginationModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    ApiUserService,
+    {provide: HTTP_INTERCEPTORS,
+    useClass: TokenGenerateInterceptor,
+    multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

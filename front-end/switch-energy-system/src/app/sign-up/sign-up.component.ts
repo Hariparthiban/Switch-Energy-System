@@ -33,17 +33,16 @@ export class SignUpComponent implements OnInit {
       this.api.create(this.signUp).subscribe((response) => {
       }, (error: HttpErrorResponse) => {
         const err = error
-        if(err.status == 200)
-        {
+        if(err.status == 200){
           Swal.fire({
             icon: 'success',
-            title: 'Account Created',
+            title: "Account Created",
             text: 'Click to login!',
             confirmButtonText: 'OK',
-            timer: 8000
+            timer: 30000
           }).then((res) =>{
             if(res.isConfirmed)
-            {
+            { 
               this.router.navigate(['login']);
             }
           });

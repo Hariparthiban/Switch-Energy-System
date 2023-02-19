@@ -6,6 +6,8 @@ import { UserInfo } from './user-info';
 import { MeterDetails } from './meter-details';
 import { Identity } from './identity';
 import { ProviderDetails } from './provider-details';
+import { Token } from '@angular/compiler';
+import { Respond } from './respond';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,14 +18,14 @@ export class ApiUserService {
   baseUrl = "http://localhost:8080/user";
   meterUrl = "http://localhost:8080/smartMeter/"
   providerUrl = "http://localhost:8080/providers/"
-  
-    login(data:LoginInfo):Observable<String>
+
+    login(data:LoginInfo):Observable<Respond>
     {
-       return this.http.get<String>(`${this.baseUrl}/${data.phone}/${data.password}/login`);
+       return this.http.post<Respond>(`${this.baseUrl}/authenticate`,data);
     }
-    create(data:UserInfo):Observable<string>
+    create(data:UserInfo):Observable<void>
     {
-       return this.http.post<string>(`${this.baseUrl}/enroll`,data);
+       return this.http.post<void>(`${this.baseUrl}/enroll`,data);
     }
     view():Observable<MeterDetails[]>
     {
@@ -37,10 +39,9 @@ export class ApiUserService {
     {
       return this.http.put(`${this.meterUrl}disable/${id}`,null);
     }
-    getUser(phone: string | null):Observable<Identity>
+    getUser(userName: string | null):Observable<Identity>
     {
-      console.log(phone);
-       return this.http.get<Identity>(`${this.baseUrl}/get/${phone}`);
+       return this.http.get<Identity>(`${this.baseUrl}/get/${userName}`);
     }
     getMeter(meterId: string | null | undefined):Observable<MeterDetails>
     {
@@ -59,5 +60,4 @@ export class ApiUserService {
     {
       return this.http.get<ProviderDetails[]>(`${this.providerUrl}get-providers`);
     }
-
 }

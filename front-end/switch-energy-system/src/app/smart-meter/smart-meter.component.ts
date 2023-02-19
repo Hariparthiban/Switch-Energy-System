@@ -36,17 +36,16 @@ export class SmartMeterComponent implements OnInit {
   {
     this.dialog.open(AddMeterComponent,{width:'450px',height:'300px' },);
   }
-  
-   
+
   form = new FormGroup({
     meter: new FormControl(''),
   });
 
   ngOnInit(): void {
-   const a = sessionStorage.getItem("phoneNumber");
+   const a = sessionStorage.getItem("name");
     this.api.getUser(a).subscribe((response) =>{
     this.userData = response
-    console.log(this.userData);
+    console.log(response);
    },
     (error:HttpErrorResponse) =>
     {

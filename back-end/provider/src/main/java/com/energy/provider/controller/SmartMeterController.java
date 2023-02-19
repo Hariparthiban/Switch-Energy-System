@@ -35,14 +35,16 @@ public class SmartMeterController {
         return smartMeterService.enableMeterConnection(meterId);
     }
     @PutMapping("disable/{meterId}")
-    public ResponseEntity<?> disableMeterConnection(@PathVariable String meterId) {return smartMeterService.disableMeterConnection(meterId);
+    public ResponseEntity<?> disableMeterConnection(@PathVariable String meterId)
+    {
+        return smartMeterService.disableMeterConnection(meterId);
     }
     @GetMapping("view-meter/{meterId}")
       public SmartMeter viewSmartMeter(@PathVariable String meterId) {
         return smartMeterService.viewSmartMeter(meterId);
     }
 
-@PostMapping("addmeter/{userId}/{providerName}")
+    @PostMapping("addmeter/{userId}/{providerName}")
     public String addMeters(@PathVariable String userId,@PathVariable String providerName) {
         return  smartMeterService.addMeters(userId,providerName);
     }

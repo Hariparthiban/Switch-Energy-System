@@ -15,31 +15,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-    public String createUser(User user)
+    public ResponseEntity<String> createUser(User user)
     {
         return userRepository.createUser(user);
     }
-
     public List<User> viewEndUsers() {
         return userRepository.viewEndUsers();
     }
-
-    public ResponseEntity<?> loginUser(long phone, String password)
+    public  Optional <User> findUser(String userName)
     {
-      return userRepository.loginUser(phone,password);
+        return userRepository.findUser(userName);
     }
-
-//    public Optional<User> getUser(long phone)
-//    {
-//       return userRepository.getUser(phone);
-//    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByName(username);

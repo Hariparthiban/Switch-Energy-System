@@ -65,13 +65,13 @@ public class SmartMeterRepository {
         List<SmartMeter> userMeterList = meterList.stream().filter(x -> x.getUserId().equals(userId)).collect(Collectors.toList());
         return userMeterList;
     }
-    @Scheduled(cron = "1 * * * * *")
-    public void saveReadings()
-    {
-        Readings read  = new Readings(4);
-         System.out.print("Readings");
-        mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
-              .is("Approved")),new Update().addToSet("readings",read),SmartMeter.class);
-    }
+//    @Scheduled(cron = "1 * * * * *")
+//    public void saveReadings()
+//    {
+//        Readings read  = new Readings(4);
+//         System.out.print("Readings");
+//        mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
+//              .is("Approved")),new Update().addToSet("readings",read),SmartMeter.class);
+//    }
 
 }
