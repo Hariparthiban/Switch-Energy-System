@@ -6,11 +6,21 @@ public class Readings {
     private LocalDateTime date;
     private  long timeStamp;
     private long unitsConsumed;
+    private long amount = 1;
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
 
     public Readings(long unitsConsumed) {
         this.date = LocalDateTime.now();
         this.timeStamp = System.currentTimeMillis();
         this.unitsConsumed = unitsConsumed;
+        this.amount = amount ;
     }
     public LocalDateTime getDate() {
         return date;

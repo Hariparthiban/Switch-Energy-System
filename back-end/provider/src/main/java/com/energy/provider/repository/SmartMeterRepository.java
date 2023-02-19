@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,6 @@ public class SmartMeterRepository {
     }
 
         public List<SmartMeter> allSmartMeter() {
-
         List<SmartMeter> al =  mongoTemplate.findAll(SmartMeter.class);
         return al;
     }
@@ -61,17 +61,34 @@ public class SmartMeterRepository {
     }
 
     public List<SmartMeter> userSmartMeters(String userId) {
+        String result = userId.substring(1, userId.length() - 1);
         List<SmartMeter> meterList = mongoTemplate.findAll(SmartMeter.class);
-        List<SmartMeter> userMeterList = meterList.stream().filter(x -> x.getUserId().equals(userId)).collect(Collectors.toList());
+        List<SmartMeter> userMeterList = meterList.stream().filter(x -> x.getUserId().equals(result)).collect(Collectors.toList());
         return userMeterList;
     }
-//    @Scheduled(cron = "1 * * * * *")
-//    public void saveReadings()
-//    {
-//        Readings read  = new Readings(4);
-//         System.out.print("Readings");
-//        mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
-//              .is("Approved")),new Update().addToSet("readings",read),SmartMeter.class);
-//    }
+    @Scheduled(cron = "1 * * * * *")
+    public void saveReadings()
+    {
+       List<SmartMeter> meterList =  mongoTemplate.findAll(SmartMeter.class);
+       Readings read = new Readings(4);
+        for(SmartMeter meter : meterList) {
+            if(meter.getReadings().size()!=0)
+            {
+            long amount = meter.getReadings().get(meter.getReadings().size() - 1).getAmount();
+            amount = amount + meter.getProvider().getChargesConception()*read.getUnitsConsumed();
+            read.setAmount(amount);
+            meter.getReadings().add(read);
+            mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
+                    .is("Approved")), new Update().set("readings", meter.getReadings()), SmartMeter.class);
+            }
+            else
+            {
+               read.setAmount(read.getAmount()*meter.getProvider().getChargesConception());
+                meter.getReadings().add(read);
+                mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
+                        .is("Approved")), new Update().set("readings", meter.getReadings()), SmartMeter.class);
+            }
+        }
+    }
 
 }

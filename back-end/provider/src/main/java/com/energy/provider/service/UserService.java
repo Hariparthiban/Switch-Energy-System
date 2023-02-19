@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +25,18 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     public ResponseEntity<String> createUser(User user)
     {
+        user.setRole("User");
         return userRepository.createUser(user);
+    }
+    public ResponseEntity<String> createAdmin(@RequestBody User user)
+    {
+        user.setRole("Admin");
+        return userRepository.createAdmin(user);
     }
     public List<User> viewEndUsers() {
         return userRepository.viewEndUsers();
     }
-    public  Optional <User> findUser(String userName)
+    public  Optional<User> findUser(String userName)
     {
         return userRepository.findUser(userName);
     }

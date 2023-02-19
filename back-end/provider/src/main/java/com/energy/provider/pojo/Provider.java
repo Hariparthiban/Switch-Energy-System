@@ -9,10 +9,10 @@ public class Provider {
     private String name;
     private int chargesConception;
     private String status;
-
     public Provider(String name, int chargesConception) {
         this.name = name;
         this.chargesConception = chargesConception;
+        this.status = "approved";
     }
     public String getStatus() {
         return status;

@@ -42,13 +42,17 @@ public class UserController {
        public List<User> viewEndUsers() {
         return userService.viewEndUsers();
     }
-
+    @PostMapping("/enroll-admin")
+    public ResponseEntity<String> createAdmin(@RequestBody User user)
+    {
+        return userService.createUser(user);
+    }
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        return userService.loadUserByUsername(username);
     }
 
-    @GetMapping("/get/{username}")
-    public  Optional <User> finduser(String userName)
+    @GetMapping("/get/{userName}")
+    public  Optional <User> finduser(@PathVariable String userName)
     {
         return userService.findUser(userName);
     }

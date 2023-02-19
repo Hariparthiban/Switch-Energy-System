@@ -18,7 +18,6 @@ public class SmartMeter {
     private List<Readings> readings;
     private String connectionStatus;
     private Provider provider;
-
     public SmartMeter(String userId) {
         this.userId = userId;
         this.connectionStatus = "pending";

@@ -18,7 +18,6 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
-        this.roles = "user";
     }
     public String getId() {
         return id;
