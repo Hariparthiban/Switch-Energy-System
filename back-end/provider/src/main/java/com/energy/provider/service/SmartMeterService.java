@@ -1,6 +1,7 @@
 package com.energy.provider.service;
 
 import com.energy.provider.pojo.Provider;
+import com.energy.provider.pojo.Readings;
 import com.energy.provider.pojo.SmartMeter;
 import com.energy.provider.repository.SmartMeterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -45,6 +47,10 @@ public class SmartMeterService {
      return smartMeterRepository.viewSmartMeter(meterId);
     }
 
+    public ResponseEntity<?> readingsCost(String meterId)
+    {
+        return smartMeterRepository.readingsCost(meterId);
+    }
 
     public List<SmartMeter> userSmartMeters(String userId) {
         return smartMeterRepository.userSmartMeters(userId);

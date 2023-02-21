@@ -17,7 +17,7 @@ public class UserInfoUserDetails implements UserDetails {
     {
         userName = user.getUserName();
         password = user.getPassword();
-        authorities = Arrays.stream(user.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

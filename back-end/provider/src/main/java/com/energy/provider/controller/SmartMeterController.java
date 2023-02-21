@@ -1,5 +1,6 @@
 package com.energy.provider.controller;
 import com.energy.provider.pojo.Provider;
+import com.energy.provider.pojo.Readings;
 import com.energy.provider.pojo.SmartMeter;
 import com.energy.provider.service.SmartMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,12 @@ public class SmartMeterController {
 
     @GetMapping("/userMeterList/{userId}")
     public List<SmartMeter> userSmartMeters(@PathVariable String userId) {
-         System.out.print(userId);
        return smartMeterService.userSmartMeters(userId);
+    }
+
+    @GetMapping("/Readings/{meterId}")
+    public ResponseEntity<?> readingsCost(@PathVariable String meterId)
+    {
+        return smartMeterService.readingsCost(meterId);
     }
 }

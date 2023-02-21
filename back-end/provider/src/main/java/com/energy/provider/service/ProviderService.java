@@ -19,8 +19,8 @@ public class ProviderService {
     public String disableProvider(String providerName) {
         return providerRepository.disableProvider(providerName);
     }
-    public String switchProvider(String currentProvider,String switchingProvider) {
-        return providerRepository.switchProvider(currentProvider,switchingProvider);
+    public void switchProvider(String meterId,String switchingProvider) {
+         providerRepository.switchProvider(meterId,switchingProvider);
     }
     public String createProvider(Provider provider)
     {

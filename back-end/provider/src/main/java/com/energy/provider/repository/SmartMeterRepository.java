@@ -26,11 +26,13 @@ public class SmartMeterRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
     public String enrollSmartMeter(String userId) {
+//        String result = userId.substring(1, userId.length() - 1);
         mongoTemplate.save(new SmartMeter(userId),"smartMeter");
         return "smart meter created for requested User";
     }
 
     public String addMeters(String userId,String providerName) {
+//        String result = userId.substring(1, userId.length() - 1);
         Provider provider = mongoTemplate.findById(providerName,Provider.class);
         mongoTemplate.save(new SmartMeter(userId,provider),"smartMeter");
         return "Your Smart meter Request under on Admin's view";
@@ -75,20 +77,39 @@ public class SmartMeterRepository {
             if(meter.getReadings().size()!=0)
             {
             long amount = meter.getReadings().get(meter.getReadings().size() - 1).getAmount();
+            read.setUnitsConsumed(4);
             amount = amount + meter.getProvider().getChargesConception()*read.getUnitsConsumed();
+            long unitsConsumed = meter.getReadings().get(meter.getReadings().size() - 1).getUnitsConsumed();
+            unitsConsumed = unitsConsumed + 4;
+            read.setUnitsConsumed(unitsConsumed);
             read.setAmount(amount);
             meter.getReadings().add(read);
-            mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
-                    .is("Approved")), new Update().set("readings", meter.getReadings()), SmartMeter.class);
+            mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus").is("Approved")), new Update().set("readings", meter.getReadings()), SmartMeter.class);
             }
             else
             {
-               read.setAmount(read.getAmount()*meter.getProvider().getChargesConception());
+                read.setUnitsConsumed(4);
+               read.setAmount(read.getAmount()+meter.getProvider().getChargesConception()*read.getUnitsConsumed());
                 meter.getReadings().add(read);
                 mongoTemplate.updateMulti(new Query().addCriteria(Criteria.where("connectionStatus")
                         .is("Approved")), new Update().set("readings", meter.getReadings()), SmartMeter.class);
             }
         }
+    }
+
+    public ResponseEntity<?> readingsCost(String meterId)
+    {
+        String result = meterId.substring(1, meterId.length() - 1);
+       SmartMeter meter =  mongoTemplate.findById(result,SmartMeter.class);
+       if(meter.getConnectionStatus().equals("Approved"))
+       {
+       Readings read = meter.getReadings().get(meter.getReadings().size()-1);
+       return new ResponseEntity(read,HttpStatus.OK);
+       }
+       else
+       {
+           return new ResponseEntity<>("Readings not Calculated Meter connection is pending",HttpStatus.INTERNAL_SERVER_ERROR);
+       }
     }
 
 }

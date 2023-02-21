@@ -6,7 +6,7 @@ public class Readings {
     private LocalDateTime date;
     private  long timeStamp;
     private long unitsConsumed;
-    private long amount = 1;
+    private long amount = 0;
 
     public long getAmount() {
         return amount;
@@ -20,7 +20,6 @@ public class Readings {
         this.date = LocalDateTime.now();
         this.timeStamp = System.currentTimeMillis();
         this.unitsConsumed = unitsConsumed;
-        this.amount = amount ;
     }
     public LocalDateTime getDate() {
         return date;

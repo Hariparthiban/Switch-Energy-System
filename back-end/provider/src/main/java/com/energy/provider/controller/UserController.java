@@ -34,7 +34,7 @@ public class UserController {
   @Autowired
   private AuthenticationManager authenticationManager;
        @PostMapping("/enroll")
-       public ResponseEntity<String> createUser(@RequestBody User user)
+       public ResponseEntity<?> createUser(@RequestBody User user)
        {
            return userService.createUser(user);
        }
@@ -45,11 +45,16 @@ public class UserController {
     @PostMapping("/enroll-admin")
     public ResponseEntity<String> createAdmin(@RequestBody User user)
     {
-        return userService.createUser(user);
+        return userService.createAdmin(user);
     }
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        return userService.loadUserByUsername(username);
     }
+    @GetMapping("/role/{userName}")
+   public Object findRole(@PathVariable String userName)
+   {
+       return userService.findRole(userName);
+   }
 
     @GetMapping("/get/{userName}")
     public  Optional <User> finduser(@PathVariable String userName)
@@ -60,11 +65,13 @@ public class UserController {
     @PostMapping("/authenticate")
     public Object authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Map<String,String> obj = new HashMap<>();
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(),authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
             obj.put("token",jwtService.generateToken(authRequest.getUserName()));
+
             return obj;
         } else {
+
             throw new UsernameNotFoundException("invalid user request !");
         }
     }

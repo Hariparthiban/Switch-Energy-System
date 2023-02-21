@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -23,14 +24,12 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-    public ResponseEntity<String> createUser(User user)
+    public ResponseEntity<?> createUser(User user)
     {
-        user.setRole("User");
         return userRepository.createUser(user);
     }
-    public ResponseEntity<String> createAdmin(@RequestBody User user)
+    public ResponseEntity<String> createAdmin(User user)
     {
-        user.setRole("Admin");
         return userRepository.createAdmin(user);
     }
     public List<User> viewEndUsers() {
@@ -39,6 +38,10 @@ public class UserService implements UserDetailsService {
     public  Optional<User> findUser(String userName)
     {
         return userRepository.findUser(userName);
+    }
+    public Object  findRole(String userName)
+    {
+        return userRepository.findRole(userName);
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

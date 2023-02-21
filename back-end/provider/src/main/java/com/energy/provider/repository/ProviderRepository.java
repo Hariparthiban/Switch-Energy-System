@@ -24,10 +24,9 @@ public class ProviderRepository {
         mongoTemplate.findAndModify(new Query().addCriteria(Criteria.where("name").is(providerName)),new Update().set("status","Not approved"),Provider.class);
         return "Provider is Disabled";
     }
-     public String switchProvider(String currentProvider,String switchingProvider) {
+     public void switchProvider(String meterId,String switchingProvider) {
          Provider provider = mongoTemplate.findById(switchingProvider, Provider.class);
-         mongoTemplate.findAndModify(new Query().addCriteria(Criteria.where("Provider.name").is(currentProvider)), new Update().set("Provider", provider), SmartMeter.class);
-         return "Switched Provider Successfully";
+         mongoTemplate.findAndModify(new Query().addCriteria(Criteria.where("smartMeterId").is(meterId)), new Update().set("Provider", provider), SmartMeter.class);
      }
     public String createProvider(Provider provider)
     {

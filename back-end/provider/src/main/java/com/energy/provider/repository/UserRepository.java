@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,14 +23,18 @@ public class UserRepository {
     private MongoTemplate mongoTemplate;
    @Autowired
    private PasswordEncoder passwordEncoder;
-    public ResponseEntity<String> createUser(User user) {
+    public ResponseEntity<?> createUser(User user) {
         boolean flag =  mongoTemplate.exists(new Query().addCriteria(Criteria.where("userName").is(user.getUserName())),User.class);
       if(flag) {
           return new ResponseEntity<String>("User Name Already Exists",HttpStatus.INTERNAL_SERVER_ERROR);
       }
       else{
-          mongoTemplate.save(new User(user.getUserName(), user.getEmail(), user.getPhone(), passwordEncoder.encode(user.getPassword())));
-          return new ResponseEntity<String>("Created Sucessfully",HttpStatus.OK);
+          HashMap<String,String>al = new HashMap<>();
+          user.setRoles("User");
+          user.setPassword(passwordEncoder.encode(user.getPassword()));
+          mongoTemplate.save(user);
+          al.put("userId", user.getId());
+          return new ResponseEntity<>(al,HttpStatus.OK);
       }
     }
     public ResponseEntity<String> createAdmin(User user) {
@@ -37,6 +43,7 @@ public class UserRepository {
             return new ResponseEntity<String>("Admin Name Already Exists",HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
+            user.setRoles("Admin");
             mongoTemplate.save(new User(user.getUserName(), user.getEmail(), user.getPhone(), passwordEncoder.encode(user.getPassword())));
             return new ResponseEntity<String>("Created Sucessfully",HttpStatus.OK);
         }
@@ -46,22 +53,31 @@ public class UserRepository {
 
     public List<User> viewEndUsers() {
        List<User> userList = mongoTemplate.findAll(User.class);
-       List<User> endUser = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
+       List<User> endUser = userList.stream().filter(c -> c.getRoles().equals("User")).collect(Collectors.toList());
        return endUser;
     }
     public Optional<User> findByName(String name)
     {
         List<User> userList = mongoTemplate.findAll(User.class);
-        List<User> endUserList = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
+        List<User> endUserList = userList.stream().filter(c -> c.getRoles().equals("User")).collect(Collectors.toList());
         Optional <User> user  = endUserList.stream().filter(x -> x.getUserName().equals(name)).findFirst();
         return  user;
     }
+
+    public Object findRole(String userName)
+    {
+        String role = mongoTemplate.findOne(Query.query(Criteria.where("userName").is(userName)),User.class).getRoles();
+        HashMap<String,String>al = new HashMap<>();
+        al.put("role",role);
+        return al;
+    }
+
 
     public Optional<User> findUser(String name)
     {
         String result = name.substring(1, name.length() - 1);
         List<User> userList = mongoTemplate.findAll(User.class);
-        List<User> endUserList = userList.stream().filter(c -> c.getRole().equals("user")).collect(Collectors.toList());
+        List<User> endUserList = userList.stream().filter(c -> c.getRoles().equals("User")).collect(Collectors.toList());
         Optional <User> user  = endUserList.stream().filter(x -> x.getUserName().equals(result)).findFirst();
         return user;
     }
