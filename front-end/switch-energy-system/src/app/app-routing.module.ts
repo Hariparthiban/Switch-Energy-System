@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminViewComponent } from './admin-view/admin-view.component';
-import { LoginViewComponent } from './login-view/login-view.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SmartMeterComponent } from './smart-meter/smart-meter.component';
-
 const routes: Routes = [
-  {path:'login',component: LoginViewComponent },
-  {path:'signup',component:SignUpComponent},
-  {path:'smart-meter',component:SmartMeterComponent},
-  {path:'admin',component:AdminViewComponent}
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module') .then(m => m.AdminModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/routed-user/routed-user.module') .then(m => m.RoutedUserModule)
+  },
+  {
+    path:' ',
+    loadChildren: () => import('./auth/auth.module') .then(m => m.AuthModule)
+    
+  }
+  ,
 ];
 
 @NgModule({

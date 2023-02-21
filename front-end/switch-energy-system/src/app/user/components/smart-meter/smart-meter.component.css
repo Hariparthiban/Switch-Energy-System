@@ -1,0 +1,59 @@
+h1
+{
+    font-family: 'Brush Script MT', cursive;
+    font-size: 50px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+button 
+{
+    background-color: lightsalmon;
+}
+
+.table table-striped table-dark
+{
+   background-color: lightskyblue;
+}
+
+.diag
+{
+    margin-right: 50px;
+    margin-top: 10px;
+    float: right;
+}
+.cdn
+{
+    background-color:palegreen ;
+
+}
+.btn{
+    background-color: mediumslateblue;
+}
+
+.col-sm-6
+{
+    position:absolute;
+    top:20%;
+    left:10%;
+}
+ 
+.card{
+    position:relative;
+    left:6%;
+    top:11%;
+    height:55%;
+}
+.btn {
+   position: relative;
+   top:15%;
+}
+#btn1 {
+    position: relative;
+    top:15%;
+    left:10%;
+ }
+
+.card-title{
+    font-size:20px;  
+}

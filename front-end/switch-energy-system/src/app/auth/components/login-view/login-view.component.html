@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>page-title</title>
+</head>
+<body>
+  <form [formGroup]="loginForm">
+    <mat-card class="example-container">
+      <mat-card-header>
+        <mat-card-title
+          style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 30px; color:rgb(45, 70, 45) ">
+          Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-header>
+        <!-- <mat-card-title style="position: relative; left:320px; top:-45px;">
+          <span class="material-symbols-outlined" style="size:35px" > electric_bolt</span>
+        </mat-card-title> -->
+      </mat-card-header>
+      <mat-form-field id="inp-name">
+        <input matInput placeholder="Enter User Name" formControlName="userName" >
+        <mat-error>Enter the name</mat-error>
+      </mat-form-field>
+      <mat-form-field id="inp-pwd">
+        <input matInput placeholder="Enter Password" formControlName="password">
+        <mat-error>Enter Password</mat-error>
+      </mat-form-field>
+      <button mat-flat-button color="primary" [disabled]="!loginForm.valid" (click)="toggle()" class="btn">login <span class="material-symbols-outlined">
+       login
+        </span></button>
+        <p class = href>Not have an Account !</p>
+        <a href="default.asp" class = href2 routerLink="/signup" > Click Here</a>
+      </mat-card>
+  </form>
+</body>
+</html>

@@ -1,5 +1,4 @@
 import { Injectable,Injector } from '@angular/core';
-import { ApiUserService } from './api-user.service';
 import {
   HttpRequest,
   HttpHandler,
@@ -8,7 +7,9 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 export class TokenGenerateInterceptor implements HttpInterceptor {
 
   constructor(private injection : Injector) {}

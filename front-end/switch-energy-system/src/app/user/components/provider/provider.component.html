@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Providers</h1>
+<div mat-dialog-content>
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">Provider Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">charges</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let provider of providers">
+        <td>
+            {{provider.name}}
+        </td>
+        <td></td>
+        <td>
+            ₹ 
+            {{provider.chargesConception}}
+        </td>
+        <br>
+    </tr>
+</tbody>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

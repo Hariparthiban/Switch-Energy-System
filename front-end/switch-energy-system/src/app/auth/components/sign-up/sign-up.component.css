@@ -1,0 +1,52 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 65%;
+    position: relative;
+    left:20%;
+    top:80px;
+  }
+  .header
+  {
+    position: absolute;
+    top:3%;
+    left:10%;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:40px;
+    color:rgb(40, 141, 126)
+  }
+   .img-card{
+    position: relative;
+    left:55%;
+    top:30%;
+    height:43%;
+    width:20%;
+    background-image:url("src/assets/logo1.jpg");
+    background-size:contain;
+    background-repeat: no-repeat;
+   }
+   .card
+   {
+       width:85%;
+       height:80%;
+       background-color:rgb(185, 255, 255);
+       position: absolute;
+       top:14%;
+       left:5%;
+       right:5%;
+   }
+
+   #btn
+   {
+    position: relative;
+    top:150px;
+   }
+   #inp2,#inp3,#inp4
+   {
+      position:relative;
+      top:7%;
+   }

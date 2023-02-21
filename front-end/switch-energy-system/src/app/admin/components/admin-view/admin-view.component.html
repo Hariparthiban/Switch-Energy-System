@@ -1,0 +1,69 @@
+<div class="container">
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <h1>Smart Meters</h1>
+            </td>
+        </tr>
+    </table>
+
+    <div class="diag">
+        <button class="btn" (click)="viewMeters()" mat-raised-button>View SmartMeters</button>
+        <p></p>
+    </div>
+
+    <div class="diag-box">
+        <button class="btn1" (click)="createProvider()" mat-raised-button>Create Provider</button>
+        <p></p>
+    </div>
+    <div class="diag-admin">
+        <button class="btn1" (click)="createAdmin()" mat-raised-button>Create Admin</button>
+        <p></p>
+    </div>
+    
+    <table class="table table-striped table-hover">
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">MeterId</th>
+                <th scope="col">UserId</th>
+                <th scope="col">Provider Name</th>
+                <th scope="col">charges</th>
+                <th scope="col">Connection</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let meter of meterList | paginate :{itemsPerPage: limit, currentPage: page};">
+                <td>
+                    {{meter.smartMeterId}}
+                </td>
+                <td>
+                    {{meter.userId }}
+                </td>
+                <td>
+                    {{meter.provider.name }}
+                </td>
+                <td>
+                    {{meter.provider.chargesConception}}
+                </td>
+                <td>
+                    {{meter.connectionStatus}}
+                </td>
+                <td>
+                    <button mat-raised-button color="accent" (click)="enable(meter.smartMeterId)" >Enable</button>
+                </td>
+                <td>
+                    <button mat-raised-button color="warn" (click)="disable(meter.smartMeterId)" >Disable</button>
+                </td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        <router-outlet></router-outlet>
+    </table>
+</div>
