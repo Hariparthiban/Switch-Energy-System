@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.createUser(user);
     }
-    public ResponseEntity<String> createAdmin(User user)
+    public ResponseEntity<?> createAdmin(User user)
     {
         return userRepository.createAdmin(user);
     }
@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.findUser(userName);
     }
-    public Object  findRole(String userName)
+    public Object findRole(String userName)
     {
         return userRepository.findRole(userName);
     }

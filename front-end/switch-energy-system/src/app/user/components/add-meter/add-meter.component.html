@@ -1,14 +1,8 @@
 <h1 mat-dialog-title>Add Meters</h1>
 <div mat-dialog-content>
     <form [formGroup]="newMeter" >
-        <mat-form-field>
-            <mat-label>Enter UserId</mat-label>
-            <input matInput type="text" formControlName="userId">
-        </mat-form-field>
-        <br>
-        <br>
-        <br>
         <mat-form-field appearance="fill">
+          <mat-label>Provider</mat-label>
             <mat-select formControlName="providerName" >
               <mat-option [value]=provider.name  *ngFor="let provider of providers">
                 {{provider.name}}

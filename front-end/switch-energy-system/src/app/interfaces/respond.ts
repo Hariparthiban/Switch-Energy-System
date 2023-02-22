@@ -1,5 +1,5 @@
 export interface Respond {
     token : string
-    id : string;
+    userId : string;
     role : string;
 }

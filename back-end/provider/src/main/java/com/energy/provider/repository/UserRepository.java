@@ -33,24 +33,25 @@ public class UserRepository {
           user.setRoles("User");
           user.setPassword(passwordEncoder.encode(user.getPassword()));
           mongoTemplate.save(user);
+          System.out.println(user.getUserName());
           al.put("userId", user.getId());
-          return new ResponseEntity<>(al,HttpStatus.OK);
+          return new ResponseEntity<Object>(al,HttpStatus.OK);
       }
     }
-    public ResponseEntity<String> createAdmin(User user) {
+    public ResponseEntity<?> createAdmin(User user) {
         boolean flag =  mongoTemplate.exists(new Query().addCriteria(Criteria.where("userName").is(user.getUserName())),User.class);
         if(flag) {
             return new ResponseEntity<String>("Admin Name Already Exists",HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
+            HashMap<String,String>al = new HashMap<>();
             user.setRoles("Admin");
-            mongoTemplate.save(new User(user.getUserName(), user.getEmail(), user.getPhone(), passwordEncoder.encode(user.getPassword())));
-            return new ResponseEntity<String>("Created Sucessfully",HttpStatus.OK);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            mongoTemplate.save(user);
+            al.put("userId", user.getId());
+            return new ResponseEntity<Object>(al,HttpStatus.OK);
         }
     }
-
-
-
     public List<User> viewEndUsers() {
        List<User> userList = mongoTemplate.findAll(User.class);
        List<User> endUser = userList.stream().filter(c -> c.getRoles().equals("User")).collect(Collectors.toList());
@@ -71,8 +72,6 @@ public class UserRepository {
         al.put("role",role);
         return al;
     }
-
-
     public Optional<User> findUser(String name)
     {
         String result = name.substring(1, name.length() - 1);

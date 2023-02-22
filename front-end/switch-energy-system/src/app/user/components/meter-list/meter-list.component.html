@@ -23,12 +23,13 @@
                 </td>
                  <td>
                     <mat-form-field  [formGroup]="newMeter" appearance="fill">
+                        <mat-label>Provider</mat-label>
                         <mat-select formControlName="providerName" >
                           <mat-option [value]=provider.name  *ngFor="let provider of providers">
                             {{provider.name}}
                           </mat-option>
                         </mat-select>
-                      </mat-form-field>
+                    </mat-form-field>
                  </td>
                  <td>
                     <button type="button" class="btn btn-info" (click)="makeSwitch(meter.smartMeterId)">Switch</button>

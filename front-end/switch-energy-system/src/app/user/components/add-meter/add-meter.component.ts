@@ -28,7 +28,7 @@ export class AddMeterComponent implements OnInit {
   }
   openDialog()
   {
-   this.api.addMeter(this.newMeter.value.userId,this.newMeter.value.providerName).subscribe((response) => {
+   this.api.addMeter(sessionStorage.getItem('userId'),this.newMeter.value.providerName).subscribe((response) => {
    },(error:HttpErrorResponse) => {
       const err = error
       if(err.status == 200)
@@ -39,12 +39,7 @@ export class AddMeterComponent implements OnInit {
           text: 'Your Request Under Admin View',
           confirmButtonText: 'OK',
           timer: 8000
-        }).then((res) =>{
-          if(res.isConfirmed)
-          {
-            
-          }
-        });
+        }).then((res) =>{});
       }
    })
   }

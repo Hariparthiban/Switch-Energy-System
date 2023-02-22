@@ -17,10 +17,6 @@ import java.util.stream.Collectors;
 public class SmartMeterController {
      @Autowired
      private SmartMeterService smartMeterService;
-     @PostMapping("/{userId}/enroll")
-     public String enrollSmartMeter(@PathVariable String userId) {
-         return smartMeterService.enrollMeter(userId);
-     }
      @GetMapping("/requested-meters")
     public List<SmartMeter> smartMeterRequests()
     {
@@ -45,7 +41,7 @@ public class SmartMeterController {
         return smartMeterService.viewSmartMeter(meterId);
     }
 
-    @PostMapping("addmeter/{userId}/{providerName}")
+    @PutMapping("addmeter/{userId}/{providerName}")
     public String addMeters(@PathVariable String userId,@PathVariable String providerName) {
         return  smartMeterService.addMeters(userId,providerName);
     }

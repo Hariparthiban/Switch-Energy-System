@@ -22,7 +22,7 @@ export class CreateAdminComponent implements OnInit {
     password:  new FormControl('',[Validators.required, Validators.pattern('[A-Za-z0-9]*')]),
     })
     signUp : UserInfo = {userName:'',email:'',phone:0,password:''}
-    sign()
+    createAdmin()
     {
         this.signUp.userName = this.signUpForm.value.userName;
         this.signUp.email=this.signUpForm.value.email;
@@ -39,12 +39,7 @@ export class CreateAdminComponent implements OnInit {
             text: 'Click to login!',
             confirmButtonText: 'OK',
             timer: 30000
-          }).then((res) =>{
-            if(res.isConfirmed)
-            { 
-             
-            }
-          });
+          }).then((res) =>{});
         }
       })
     }

@@ -33,12 +33,7 @@ export class CreateProviderComponent implements OnInit {
           text: 'Added Successfully',
           confirmButtonText: 'OK',
           timer: 8000
-        }).then((res) =>{
-          if(res.isConfirmed)
-          {
-            
-          }
-        });
+        }).then((res) =>{});
       }
    })
   }

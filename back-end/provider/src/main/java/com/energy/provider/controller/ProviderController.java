@@ -24,8 +24,8 @@ public class ProviderController {
     public String disableProvider(String providerName) {
         return  providerService.disableProvider(providerName);
     }
-    @PutMapping("{meterId}/switchingProvider/make-switch")
-    public void switchProvider(String meterId,String switchingProvider) {
+    @PutMapping("{meterId}/{switchingProvider}/make-switch")
+    public void switchProvider(@PathVariable String meterId, @PathVariable String switchingProvider) {
           providerService.switchProvider(meterId,switchingProvider);
     }
     @GetMapping("get-providers")

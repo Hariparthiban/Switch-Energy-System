@@ -29,29 +29,24 @@ export class LoginViewComponent implements OnInit {
     this.api.login(this.loginDetails).subscribe((response) => {
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("name", JSON.stringify(this.loginDetails.userName));
-      
-      this.api.getRoles(this.loginDetails.userName).subscribe((response) => {
-        if(response.role == 'User')
-        this.router.navigate(['smart-meter']);
-        else
-        this.router.navigate(['admin-view']);
-})
 
+      this.api.getRoles(this.loginDetails.userName).subscribe((response) => {
+        if (response.role == 'User')
+          this.router.navigate(['smart-meter']);
+        else
+          this.router.navigate(['admin-view']);
+      })
     }, (error: HttpErrorResponse) => {
       const err = error;
-      if (err.status == 500) {
-        Swal.fire({
-          icon: 'success',
-          title: "Invalid Credentials",
-          text: 'UserName or Password may be Incorrect',
-          confirmButtonText: 'OK',
-          timer: 30000
-        }).then((res) => {
-          if (res.isConfirmed) {
+      console.log(err,err.status);
 
-          }
-        });
-      }
+      Swal.fire({
+        icon: 'error',
+        title: "Invalid Credentials",
+        text: 'UserName or Password may be Incorrect',
+        confirmButtonText: 'OK',
+        timer: 30000
+      }).then((res) => { });
     })
   }
 }

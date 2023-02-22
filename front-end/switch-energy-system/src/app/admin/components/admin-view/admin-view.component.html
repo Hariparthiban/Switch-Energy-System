@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <table>
         <tr>
             <td></td>
@@ -66,4 +66,74 @@
         <pagination-controls (pageChange)="page = $event"></pagination-controls>
         <router-outlet></router-outlet>
     </table>
-</div>
+</div> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Switch Energy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" (click)="createProvider()" style="cursor:pointer" >Create Providers</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" (click)="viewMeters()" style="cursor:pointer" >View User Meters</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" (click)="createAdmin()" style="cursor:pointer" >Create Admin</a>
+        </li> 
+        <li class="nav-item active">
+          <a class="nav-link" (click)="viewProvider()" style="cursor:pointer" >View Provider</a>
+        </li> 
+      </ul>
+    </div>
+</nav>
+      <table class="table table-striped table-hover">
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">MeterId</th>
+                <th scope="col">UserId</th>
+                <th scope="col">Provider Name</th>
+                <th scope="col">charges</th>
+                <th scope="col">Connection</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let meter of meterList | paginate :{itemsPerPage: limit, currentPage: page};">
+                <td>
+                    {{meter.smartMeterId}}
+                </td>
+                <td>
+                    {{meter.userId }}
+                </td>
+                <td>
+                    {{meter.provider.name }}
+                </td>
+                <td>
+                    {{meter.provider.chargesConception}}
+                </td>
+                <td>
+                    {{meter.connectionStatus}}
+                </td>
+                <td>
+                    <button mat-raised-button color="accent" (click)="enableMeter(meter.smartMeterId)" >Enable</button>
+                </td>
+                <td>
+                    <button mat-raised-button color="warn" (click)="disableMeter(meter.smartMeterId)" >Disable</button>
+                </td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        <router-outlet></router-outlet>
+    </table>
+
+
+
+

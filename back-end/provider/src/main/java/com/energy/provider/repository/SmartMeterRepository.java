@@ -25,16 +25,10 @@ public class SmartMeterRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-    public String enrollSmartMeter(String userId) {
-//        String result = userId.substring(1, userId.length() - 1);
-        mongoTemplate.save(new SmartMeter(userId),"smartMeter");
-        return "smart meter created for requested User";
-    }
-
     public String addMeters(String userId,String providerName) {
-//        String result = userId.substring(1, userId.length() - 1);
+        String result = userId.substring(1, userId.length() - 1);
         Provider provider = mongoTemplate.findById(providerName,Provider.class);
-        mongoTemplate.save(new SmartMeter(userId,provider),"smartMeter");
+        mongoTemplate.save(new SmartMeter(result,provider),"smartMeter");
         return "Your Smart meter Request under on Admin's view";
     }
 
@@ -72,15 +66,15 @@ public class SmartMeterRepository {
     public void saveReadings()
     {
        List<SmartMeter> meterList =  mongoTemplate.findAll(SmartMeter.class);
-       Readings read = new Readings(4);
+
         for(SmartMeter meter : meterList) {
-            if(meter.getReadings().size()!=0)
+            Readings read = new Readings();
+            if(meter.getReadings().size()>0)
             {
             long amount = meter.getReadings().get(meter.getReadings().size() - 1).getAmount();
             read.setUnitsConsumed(4);
             amount = amount + meter.getProvider().getChargesConception()*read.getUnitsConsumed();
-            long unitsConsumed = meter.getReadings().get(meter.getReadings().size() - 1).getUnitsConsumed();
-            unitsConsumed = unitsConsumed + 4;
+            long unitsConsumed = meter.getReadings().get(meter.getReadings().size() - 1).getUnitsConsumed() + 4;
             read.setUnitsConsumed(unitsConsumed);
             read.setAmount(amount);
             meter.getReadings().add(read);
@@ -96,7 +90,6 @@ public class SmartMeterRepository {
             }
         }
     }
-
     public ResponseEntity<?> readingsCost(String meterId)
     {
         String result = meterId.substring(1, meterId.length() - 1);

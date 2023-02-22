@@ -11,38 +11,35 @@ import { ApiUserService } from 'src/app/service/api-user.service';
 })
 export class MeterListComponent implements OnInit {
 
-  constructor(private api : ApiUserService) { }
+  constructor(private api: ApiUserService) { }
   page: number = 1;
   limit: number = 5;
   userMeterList: MeterDetails[] = [{
     smartMeterId: '',
     userId: '',
     connectionStatus: '',
-    provider: {name:'',chargesConception:null}
+    provider: { name: '', chargesConception: null }
   }]
   newMeter = new FormGroup({
-   providerName : new FormControl(''),
-   });
-  providers : ProviderDetails[] = []
+    providerName: new FormControl(''),
+  });
+  providers: ProviderDetails[] = []
   ngOnInit(): void {
     this.api.viewUserMeters(sessionStorage.getItem("userId")).subscribe((response) => {
       this.userMeterList = response;
       console.log(response);
-   })
-   
-   this.api.viewProvider().subscribe((response)=>{
-    this.providers = response;
-  })
+    })
+
+    this.api.viewProvider().subscribe((response) => {
+      this.providers = response;
+    })
   }
-  makeSwitch(meterId:string|null|undefined)
-  {
-    this.api.switchProvider(meterId,this.newMeter.value.providerName).subscribe((response)=>{
+  makeSwitch(meterId: string | null | undefined) {
+    this.api.switchProvider(meterId, this.newMeter.value.providerName).subscribe((response) => {
       this.api.viewUserMeters(sessionStorage.getItem("userId")).subscribe((response) => {
         this.userMeterList = response;
         console.log(response);
-     })
+      })
     })
-
-    
   }
 }

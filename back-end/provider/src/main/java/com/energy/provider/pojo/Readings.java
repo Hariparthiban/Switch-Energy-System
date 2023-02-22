@@ -16,10 +16,9 @@ public class Readings {
         this.amount = amount;
     }
 
-    public Readings(long unitsConsumed) {
+    public Readings() {
         this.date = LocalDateTime.now();
         this.timeStamp = System.currentTimeMillis();
-        this.unitsConsumed = unitsConsumed;
     }
     public LocalDateTime getDate() {
         return date;

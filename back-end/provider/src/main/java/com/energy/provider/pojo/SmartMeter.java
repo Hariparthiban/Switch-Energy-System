@@ -21,7 +21,7 @@ public class SmartMeter {
     public SmartMeter(String userId) {
         this.userId = userId;
         this.connectionStatus = "pending";
-        this.provider = new Provider("Power for ALL",2);
+        this.provider = new Provider("Power for ALL",3);
         this.readings = new ArrayList<Readings>();
     }
     public SmartMeter(String userId,Provider provider) {

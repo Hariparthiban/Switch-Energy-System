@@ -15,8 +15,9 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" (click)="openMeterBox()" style="cursor:pointer" >Add Meters</a>
-      </li>
+      </li> 
     </ul>
+    
     <form [formGroup]="form" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" formControlName="meter"  type="search" placeholder="Find By Meter ID" aria-label="Find">
       <button class="btn btn-info my-2 my-sm-0" (click)="find()">Search</button>
@@ -62,5 +63,3 @@
     <button type="button" class="btn btn-info" (click)="close()">close</button>
     <button type="button" class="btn btn-info" (click)="openReadingBox()" id="btn1">View Readings</button>
 </div>
-
-<!-- 63ea2a1940d94379d2ef514e -->

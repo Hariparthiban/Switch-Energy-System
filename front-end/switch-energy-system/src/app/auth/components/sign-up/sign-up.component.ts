@@ -26,17 +26,17 @@ export class SignUpComponent implements OnInit {
     signUp : UserInfo = {userName:'',email:'',phone:0,password:''}
     respond : Respond = {
       token: '',
-      id: '',
+      userId: '',
       role: ''
     };
-    sign()
+
+    createUser()
     {
         this.signUp.userName = this.signUpForm.value.userName;
         this.signUp.email=this.signUpForm.value.email;
         this.signUp.phone=this.signUpForm.value.phone;
         this.signUp.password=this.signUpForm.value.password;
-
-      this.api.create(this.signUp).subscribe((response) => {
+      this.api.createUser(this.signUp).subscribe((response) => {
         this.respond = response;
           Swal.fire({
             icon: 'success',
@@ -47,14 +47,9 @@ export class SignUpComponent implements OnInit {
           }).then((res) =>{
             if(res.isConfirmed)
             { 
-              this.api.defaultMeter(this.respond.id).subscribe((response) =>{},
-              (error:HttpErrorResponse) => {})
-              this.router.navigate(['login']);
+              this.router.navigate(['login'])
             }
           });
-      }, (error: HttpErrorResponse) => {
-        const err = error
-       
-      })
+      }, (error: HttpErrorResponse) => {})
     }
 }

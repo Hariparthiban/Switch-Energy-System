@@ -43,7 +43,7 @@ public class UserController {
         return userService.viewEndUsers();
     }
     @PostMapping("/enroll-admin")
-    public ResponseEntity<String> createAdmin(@RequestBody User user)
+    public ResponseEntity<?> createAdmin(@RequestBody User user)
     {
         return userService.createAdmin(user);
     }
@@ -64,14 +64,13 @@ public class UserController {
 
     @PostMapping("/authenticate")
     public Object authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+        System.out.println(authRequest.getUserName()+" "+authRequest.getPassword());
         Map<String,String> obj = new HashMap<>();
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(),authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
             obj.put("token",jwtService.generateToken(authRequest.getUserName()));
-
             return obj;
         } else {
-
             throw new UsernameNotFoundException("invalid user request !");
         }
     }

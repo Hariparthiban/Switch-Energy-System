@@ -31,18 +31,8 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
     @Bean
-    //authentication
     public UserDetailsService userDetailsService() {
-//        UserDetails admin = User.withUsername("Basant")
-//                .password(encoder.encode("Pwd1"))
-//                .roles("ADMIN")
-//                .build();
-//        UserDetails user = User.withUsername("John")
-//                .password(encoder.encode("Pwd2"))
-//                .roles("USER","ADMIN","HR")
-//                .build();n, user);
         return new UserService();
-//        return new InMemoryUserDetailsManager(admi
     }
 
     @Bean

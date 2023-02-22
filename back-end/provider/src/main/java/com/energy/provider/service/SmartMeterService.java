@@ -21,11 +21,6 @@ import java.util.stream.Collectors;
 public class SmartMeterService {
 @Autowired
     private SmartMeterRepository smartMeterRepository;
-  public String enrollMeter(String userId)
- {
-    return smartMeterRepository.enrollSmartMeter(userId);
- }
-
      public List<SmartMeter> smartMeters() {
     return smartMeterRepository.allSmartMeter();
  }

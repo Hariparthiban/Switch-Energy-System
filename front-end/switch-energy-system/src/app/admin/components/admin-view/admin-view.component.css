@@ -19,25 +19,6 @@ button
 {
    background-color: lightskyblue;
 }
-
-.diag
-{
-    margin-right: 50px;
-    margin-top: 10px;
-    float: right;
-}
-.diag-box
-{
-    margin-right: 70px;
-    margin-top: 10px;
-    float: right;
-}
-.diag-admin
-{
-    margin-right: 80px;
-    margin-top: 10px;
-    float: right;
-}
 .cdn
 {
     background-color:palegreen ;
