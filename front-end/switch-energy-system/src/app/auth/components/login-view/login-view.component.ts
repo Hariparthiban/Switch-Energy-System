@@ -38,11 +38,9 @@ export class LoginViewComponent implements OnInit {
       })
     }, (error: HttpErrorResponse) => {
       const err = error;
-      console.log(err,err.status);
-
       Swal.fire({
         icon: 'error',
-        title: "Invalid Credentials",
+        title: 'Invalid Credentials',
         text: 'UserName or Password may be Incorrect',
         confirmButtonText: 'OK',
         timer: 30000

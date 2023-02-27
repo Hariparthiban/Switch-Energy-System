@@ -59,8 +59,7 @@ export class SmartMeterComponent implements OnInit {
    const a = sessionStorage.getItem("name");
     this.api.getUser(a).subscribe((response) =>{
     this.userData = response
-    console.log(this.userData);
-   },
+  },
     (error:HttpErrorResponse) =>
     {
        const err =  error;
@@ -72,7 +71,6 @@ export class SmartMeterComponent implements OnInit {
   {
    this.api.getMeter(this.form.value.meter).subscribe((response) => {
     this.userMeter = response;
-    console.log(this.userMeter);
   })
   this.show = true; 
  }
