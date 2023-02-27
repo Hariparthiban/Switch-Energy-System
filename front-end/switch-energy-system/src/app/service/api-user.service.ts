@@ -28,8 +28,8 @@ export class ApiUserService {
     return this.http.post<Respond>(`${this.baseUrl}/enroll`, data);
   }
 
-  createAdmin(data: UserInfo): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/enroll-admin`, data);
+  createAdmin(data: UserInfo): Observable<Respond> {
+    return this.http.post<Respond>(`${this.baseUrl}/enroll-admin`, data);
   }
   getRoles(name: string | null | undefined): Observable<Respond> {
     return this.http.get<Respond>(`${this.baseUrl}/role/${name}`);

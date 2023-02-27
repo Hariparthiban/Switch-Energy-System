@@ -28,10 +28,6 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.createUser(user);
     }
-    public ResponseEntity<?> createAdmin(User user)
-    {
-        return userRepository.createAdmin(user);
-    }
     public List<User> viewEndUsers() {
         return userRepository.viewEndUsers();
     }
@@ -39,9 +35,9 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.findUser(userName);
     }
-    public Object findRole(String userName)
+    public Object findUserEmail(String userName)
     {
-        return userRepository.findRole(userName);
+        return userRepository.findUserEmail(userName);
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

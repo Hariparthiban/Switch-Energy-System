@@ -1,8 +1,6 @@
 package com.energy.provider.pojo;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 @Document(collection = "User")
 public class User {
     @Id
@@ -13,13 +11,13 @@ public class User {
     private long phone;
     private String roles;
 
-
     public User(String userName, String email, long phone, String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.roles = roles;
     }
     public String getId() {
         return id;

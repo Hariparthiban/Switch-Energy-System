@@ -39,9 +39,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                  return http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user/authenticate","/user/enroll").permitAll()
+                .requestMatchers("/user/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/**").authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .authorizeHttpRequests().requestMatchers("/smartMeter/**","/providers/**").authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class)

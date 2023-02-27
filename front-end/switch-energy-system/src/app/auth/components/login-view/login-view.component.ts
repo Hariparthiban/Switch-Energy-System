@@ -17,7 +17,7 @@ export class LoginViewComponent implements OnInit {
 
   constructor(private api: ApiUserService, private router: Router, private meter: SmartMeterComponent) { }
   loginForm = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+')]),
+    userName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z]+')]),
     password: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z0-9]*')]),
   });
   loginDetails: LoginInfo = { userName: '', password: '' }
@@ -31,10 +31,10 @@ export class LoginViewComponent implements OnInit {
       sessionStorage.setItem("name", JSON.stringify(this.loginDetails.userName));
 
       this.api.getRoles(this.loginDetails.userName).subscribe((response) => {
-        if (response.role == 'User')
-          this.router.navigate(['smart-meter']);
+        if (response.email == 'abc@admin.com' )
+        this.router.navigate(['view-admin']);
         else
-          this.router.navigate(['admin-view']);
+        this.router.navigate(['smart-meter']);
       })
     }, (error: HttpErrorResponse) => {
       const err = error;

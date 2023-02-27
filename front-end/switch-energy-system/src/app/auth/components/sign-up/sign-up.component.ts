@@ -27,7 +27,8 @@ export class SignUpComponent implements OnInit {
     respond : Respond = {
       token: '',
       userId: '',
-      role: ''
+      email:'',
+      role:''
     };
 
     createUser()

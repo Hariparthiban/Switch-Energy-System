@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 @Document(collection="smartMeter")
-@NoArgsConstructor
-@AllArgsConstructor
 public class SmartMeter {
 
     @Id
@@ -18,12 +16,6 @@ public class SmartMeter {
     private List<Readings> readings;
     private String connectionStatus;
     private Provider provider;
-    public SmartMeter(String userId) {
-        this.userId = userId;
-        this.connectionStatus = "pending";
-        this.provider = new Provider("Power for ALL",3);
-        this.readings = new ArrayList<Readings>();
-    }
     public SmartMeter(String userId,Provider provider) {
         this.userId = userId;
         this.connectionStatus = "pending";
